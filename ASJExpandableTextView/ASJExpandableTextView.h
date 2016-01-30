@@ -23,6 +23,7 @@
 @import UIKit;
 
 typedef void (^DoneTappedBlock)(NSString *text);
+
 typedef void (^HeightChangedBlock)(CGFloat newHeight);
 
 @interface ASJExpandableTextView : UITextView
@@ -30,40 +31,44 @@ typedef void (^HeightChangedBlock)(CGFloat newHeight);
 /**
  *  Sets the placeholder text when no text has been input.
  */
-@property (copy, nonatomic) IBInspectable NSString *placeholder;
+@property(copy, nonatomic) IBInspectable NSString *placeholder;
+
+/**
+ * 设置placeholder text label font color
+ */
+@property(nonatomic, strong) UIColor *placeholderTextColor;
 
 /**
  *  Sets whether the text view should increase and decrease
  *  in height according to its content.
  */
-@property (nonatomic) IBInspectable BOOL isExpandable;
+@property(nonatomic) IBInspectable BOOL isExpandable;
 
 /**
  *  This property is only of use when 'isExpandable' is YES.
  *  Sets the maximum number of visible lines of text.
  */
-@property (nonatomic) IBInspectable NSUInteger maximumLineCount;
+@property(nonatomic) IBInspectable NSUInteger maximumLineCount;
 
 /**
  *  Set this property "YES" to show a "Done" button over the
  *  keyboard.  Tapping it will hide the keyboard.
  */
-@property (nonatomic) IBInspectable BOOL shouldShowDoneButtonOverKeyboard;
+@property(nonatomic) IBInspectable BOOL shouldShowDoneButtonOverKeyboard;
 
 /**
  *  A block that will be executed when the "Done" button over
  *  the keyboard will be tapped. Unusable if "shouldShowDoneButtonOverKeyboard"
  *  not set to YES.
  */
-@property (copy) DoneTappedBlock doneTappedBlock;
+@property(copy) DoneTappedBlock doneTappedBlock;
 
 /**
  *  A block that will be executed when the height of the text view changes.
  *  Unusable if the text view is not expandable.
  */
-@property (copy) HeightChangedBlock heightChangedBlock;
+@property(copy) HeightChangedBlock heightChangedBlock;
 
-- (void)setDoneTappedBlock:(DoneTappedBlock)doneTappedBlock;
 - (void)setHeightChangedBlock:(HeightChangedBlock)heightChangedBlock;
 
 @end

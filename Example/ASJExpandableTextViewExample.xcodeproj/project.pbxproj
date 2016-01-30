@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C0122AB71B518E45004DED5D /* ASJInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0122AB61B518E45004DED5D /* ASJInputAccessoryView.xib */; };
 		C05A9DC41B4D6698003CD214 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C05A9DC31B4D6698003CD214 /* main.m */; };
 		C05A9DC71B4D6698003CD214 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C05A9DC61B4D6698003CD214 /* AppDelegate.m */; };
 		C05A9DCA1B4D6698003CD214 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C05A9DC91B4D6698003CD214 /* ViewController.m */; };
@@ -18,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C0122AB61B518E45004DED5D /* ASJInputAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASJInputAccessoryView.xib; sourceTree = "<group>"; };
+		BE43FB28F35BCB8B71762FA6 /* SLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLogger.h; sourceTree = "<group>"; };
 		C05A9DBE1B4D6698003CD214 /* ASJExpandableTextViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASJExpandableTextViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C05A9DC21B4D6698003CD214 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C05A9DC31B4D6698003CD214 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -72,6 +71,7 @@
 				C05A9DCE1B4D6698003CD214 /* Images.xcassets */,
 				C05A9DD01B4D6698003CD214 /* LaunchScreen.xib */,
 				C05A9DC11B4D6698003CD214 /* Supporting Files */,
+				BE43FB28F35BCB8B71762FA6 /* SLogger.h */,
 			);
 			path = ASJExpandableTextViewExample;
 			sourceTree = "<group>";
@@ -90,7 +90,6 @@
 			children = (
 				C0CBA3A51B5033F70013DD90 /* ASJExpandableTextView.h */,
 				C0CBA3A61B5033F70013DD90 /* ASJExpandableTextView.m */,
-				C0122AB61B518E45004DED5D /* ASJInputAccessoryView.xib */,
 			);
 			name = ASJExpandableTextView;
 			path = ../../ASJExpandableTextView;
@@ -127,6 +126,7 @@
 				TargetAttributes = {
 					C05A9DBD1B4D6698003CD214 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 9VEYZYWMZC;
 					};
 				};
 			};
@@ -156,7 +156,6 @@
 				C05A9DCD1B4D6698003CD214 /* Main.storyboard in Resources */,
 				C05A9DD21B4D6698003CD214 /* LaunchScreen.xib in Resources */,
 				C05A9DCF1B4D6698003CD214 /* Images.xcassets in Resources */,
-				C0122AB71B518E45004DED5D /* ASJInputAccessoryView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +281,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ASJExpandableTextViewExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sudeep.$(PRODUCT_NAME:rfc1034identifier)";
@@ -294,6 +294,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ASJExpandableTextViewExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sudeep.$(PRODUCT_NAME:rfc1034identifier)";
