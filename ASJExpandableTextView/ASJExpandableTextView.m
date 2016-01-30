@@ -23,25 +23,6 @@
 #import "ASJExpandableTextView.h"
 #import "SLogger.h"
 
-typedef void (^AccessoryViewDoneBlock)(void);
-
-@interface ASJInputAccessoryView : UIView
-
-@property(copy) AccessoryViewDoneBlock doneTappedBlock;
-
-@end
-
-@implementation ASJInputAccessoryView
-
-- (IBAction)doneButtonTapped:(UIBarButtonItem *)sender {
-    if (_doneTappedBlock) {
-        _doneTappedBlock();
-    }
-}
-
-@end
-
-
 @interface ASJExpandableTextView () {
     UILabel *placeholderLabel;
     NSUInteger currentLine;
@@ -49,7 +30,6 @@ typedef void (^AccessoryViewDoneBlock)(void);
     BOOL isPlaceholderVisible, areLayoutDefaultsSet;
 }
 
-@property(weak, nonatomic) ASJInputAccessoryView *asjInputAccessoryView;
 @property(nonatomic) CGFloat heightOfOneLine;
 @property(nonatomic) CGFloat currentContentHeight;
 @property(nonatomic) CGFloat currentTextViewHeight;
@@ -131,21 +111,6 @@ typedef void (^AccessoryViewDoneBlock)(void);
     return [super becomeFirstResponder];
 }
 
-- (void)prepareInputAccessoryView {
-    ASJInputAccessoryView *inputAccessoryView = self.asjInputAccessoryView;
-    inputAccessoryView.doneTappedBlock = ^{
-        [self resignFirstResponder];
-        if (_doneTappedBlock) {
-            _doneTappedBlock(self.text);
-        }
-    };
-    self.inputAccessoryView = inputAccessoryView;
-}
-
-- (ASJInputAccessoryView *)asjInputAccessoryView {
-    return (ASJInputAccessoryView *) [[NSBundle mainBundle] loadNibNamed:@"ASJInputAccessoryView" owner:self options:nil][0];
-}
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -159,8 +124,9 @@ typedef void (^AccessoryViewDoneBlock)(void);
 }
 
 - (void)setDefaults {
-    _isExpandable = NO;
-    _maximumLineCount = 4;
+    currentLine = 1;
+    _isExpandable = YES;
+    _maximumLineCount = 2;
     _shouldShowDoneButtonOverKeyboard = NO;
     self.shouldShowPlaceholder = NO;
 }
@@ -241,33 +207,27 @@ typedef void (^AccessoryViewDoneBlock)(void);
 }
 
 - (void)handleExpansion {
-    BOOL isOnCurrentLine = self.currentContentHeight == previousContentHeight;
+    float rawLineNumber = (self.contentSize.height - self.textContainerInset.top - self.textContainerInset.bottom) / self.font.lineHeight;
+    NSUInteger numberOfLines = (NSUInteger) round(rawLineNumber);
+    SLog(@"numberOfLines: %d", numberOfLines);
 
+    BOOL isOnCurrentLine = (numberOfLines == currentLine);
     if (isOnCurrentLine) {
         return;
     }
 
-    SLog(@"currentContentHeight: %f previousContentHeight: %f", self.currentContentHeight, previousContentHeight);
-    BOOL isOnNextLine = self.currentContentHeight > previousContentHeight;
-    previousContentHeight = self.currentContentHeight;
-
-    if (isOnNextLine) {
-        [self handleNextLine];
-        return;
-    }
-
-    [self handlePreviousLine];
+    BOOL isOnNextLine = (numberOfLines > currentLine);
+    currentLine = numberOfLines;
+    (isOnNextLine ? [self handleNextLine] : [self handlePreviousLine]);
 }
 
 - (CGFloat)currentContentHeight {
-//    SLog(@"contentSize.height: %f", self.contentSize.height);
     return self.contentSize.height;
 }
 
 #pragma mark - Next and previous lines
 
 - (void)handleNextLine {
-    currentLine++;
     if (currentLine > _maximumLineCount) {
         return;
     }
@@ -291,8 +251,6 @@ typedef void (^AccessoryViewDoneBlock)(void);
 
 - (void)handlePreviousLine {
     SLogFunc();
-
-    currentLine--;
 
     SLog(@"currentContentHeight: %f currentTextViewHeight: %f", self.currentContentHeight, self.currentTextViewHeight);
     // 这里有个1.0f的magic number...
@@ -351,6 +309,8 @@ typedef void (^AccessoryViewDoneBlock)(void);
                          CGFloat y = self.frame.origin.y;
                          CGFloat width = self.frame.size.width;
                          self.frame = CGRectMake(x, y, width, height);
+
+                         self.contentOffset = CGPointMake(0.0f, 0.0f);
                      } completion:nil];
 }
 

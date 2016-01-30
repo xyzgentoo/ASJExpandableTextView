@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE43FE3224F702FC7A0AE042 /* ExpandableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE43F4985989403C6C5B4ADE /* ExpandableTextView.m */; };
 		C05A9DC41B4D6698003CD214 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C05A9DC31B4D6698003CD214 /* main.m */; };
 		C05A9DC71B4D6698003CD214 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C05A9DC61B4D6698003CD214 /* AppDelegate.m */; };
 		C05A9DCA1B4D6698003CD214 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C05A9DC91B4D6698003CD214 /* ViewController.m */; };
@@ -17,7 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE43F4985989403C6C5B4ADE /* ExpandableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableTextView.m; sourceTree = "<group>"; };
 		BE43FB28F35BCB8B71762FA6 /* SLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLogger.h; sourceTree = "<group>"; };
+		BE43FCA5F09C67F0F9CBC43B /* ExpandableTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableTextView.h; sourceTree = "<group>"; };
 		C05A9DBE1B4D6698003CD214 /* ASJExpandableTextViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASJExpandableTextViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C05A9DC21B4D6698003CD214 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C05A9DC31B4D6698003CD214 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -72,6 +75,8 @@
 				C05A9DD01B4D6698003CD214 /* LaunchScreen.xib */,
 				C05A9DC11B4D6698003CD214 /* Supporting Files */,
 				BE43FB28F35BCB8B71762FA6 /* SLogger.h */,
+				BE43F4985989403C6C5B4ADE /* ExpandableTextView.m */,
+				BE43FCA5F09C67F0F9CBC43B /* ExpandableTextView.h */,
 			);
 			path = ASJExpandableTextViewExample;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 				C05A9DCA1B4D6698003CD214 /* ViewController.m in Sources */,
 				C05A9DC71B4D6698003CD214 /* AppDelegate.m in Sources */,
 				C05A9DC41B4D6698003CD214 /* main.m in Sources */,
+				BE43FE3224F702FC7A0AE042 /* ExpandableTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "ASJExpandableTextView.h"
 #import "SLogger.h"
+#import "ExpandableTextView.h"
 
 #define kDefaultCommentViewHeight (45.0f)
 #define kDefaultTextViewHeight (33.0f)
@@ -19,7 +20,7 @@
 @property(nonatomic, strong) UIView *commentView;
 
 // 可变高度的文字输入框
-@property(nonatomic, strong) ASJExpandableTextView *textView;
+@property(nonatomic, strong) ExpandableTextView *textView;
 
 @end
 
@@ -51,38 +52,32 @@
 
     CGFloat screenWidth = CGRectGetWidth(self.view.frame);
 
-    self.textView = [[ASJExpandableTextView alloc] initWithFrame:CGRectZero];
+    self.textView = [[ExpandableTextView alloc] initWithFrame:CGRectZero];
     _textView.font = [UIFont systemFontOfSize:fontSize];
-    // 这块是为了迎合设计的需求, 同时保证字看着比较顺眼
-    _textView.textContainer.lineFragmentPadding = 2.0f;
 
-    // 根据字体大小,上下间隔,行间距计算初始单行的控件高度, >= 这个高度可以保证用户focus时, 不会出现奇怪的滑动
-    CGFloat heightNoScrollOnFocus = _textView.textContainerInset.top + _textView.textContainerInset.bottom + fontSize + _textView.textContainer.lineFragmentPadding;
-    SLog(@"heightNoScrollOnFocus: %f", heightNoScrollOnFocus);
-    NSAssert(heightNoScrollOnFocus <= height, @"Well, if smaller than this, it will scroll on gaining focus.");
-
-    CGRect textFrame = (CGRect) {.origin = {xOffset, yOffset},
-            .size = {screenWidth - 2 * xOffset, height}};
+    CGRect textFrame = (CGRect) {.origin = {xOffset, yOffset}, .size = {screenWidth - 2 * xOffset, height}};
     _textView.frame = textFrame;
 
-    _textView.placeholder = @"Type something here...";
-    _textView.isExpandable = YES;
-    _textView.maximumLineCount = 2;
+    _textView.placeholderText = @"Type something here...";
+    _textView.placeholderTextColor = [UIColor blackColor];
+
+    _textView.maxNumberOfLines = 2;
+
     _textView.returnKeyType = UIReturnKeyDefault;
     _textView.backgroundColor = [UIColor lightGrayColor];
-    _textView.placeholderTextColor = [UIColor blackColor];
     _textView.layer.masksToBounds = YES;
     _textView.layer.cornerRadius = 4.0f;
+
     __weak typeof(self) weakSelf = self;
     _textView.heightChangedBlock = ^(CGFloat newHeight) {
-        SLog(@"!! newHeight: %f", newHeight);
+        SLog(@"newHeight: %f", newHeight);
         CGFloat commentHeight = kDefaultCommentViewHeight + newHeight - kDefaultTextViewHeight;
         CGFloat commentYOffset = CGRectGetMaxY(weakSelf.commentView.frame) - commentHeight;
         CGRect frame = weakSelf.commentView.frame;
-        SLog(@"!! old frame: %@", NSStringFromCGRect(frame));
+        SLog(@"old frame: %@", NSStringFromCGRect(frame));
         frame.origin.y = commentYOffset;
         frame.size.height = commentHeight;
-        SLog(@"!! new frame: %@", NSStringFromCGRect(frame));
+        SLog(@"new frame: %@", NSStringFromCGRect(frame));
         weakSelf.commentView.frame = frame;
     };
 
@@ -101,7 +96,9 @@
 }
 
 - (void)clickSendButton:(id)clickSendButton {
-    NSLog(@"clicked!");
+    if ([_textView isFirstResponder]) {
+        [_textView resignFirstResponder];
+    }
 }
 
 @end
