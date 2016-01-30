@@ -69,9 +69,9 @@
     _textView.layer.cornerRadius = 4.0f;
 
     __weak typeof(self) weakSelf = self;
-    _textView.heightChangedBlock = ^(CGFloat newHeight) {
-        SLog(@"newHeight: %f", newHeight);
-        CGFloat commentHeight = kDefaultCommentViewHeight + newHeight - kDefaultTextViewHeight;
+    _textView.heightChangedBlock = ^(CGFloat heightChange) {
+        SLog(@"heightChange: %f", heightChange);
+        CGFloat commentHeight = CGRectGetHeight(weakSelf.commentView.frame) + heightChange;
         CGFloat commentYOffset = CGRectGetMaxY(weakSelf.commentView.frame) - commentHeight;
         CGRect frame = weakSelf.commentView.frame;
         SLog(@"old frame: %@", NSStringFromCGRect(frame));

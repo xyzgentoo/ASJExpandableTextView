@@ -1,10 +1,9 @@
 //
 // Created by lihong on 16/1/30.
-// Copyright (c) 2016 Sudeep Jaiswal. All rights reserved.
+// Copyright (c) 2016
 //
 
 #import "ExpandableTextView.h"
-#import "SLogger.h"
 
 @interface ExpandableTextView () {
     // 当前text对应的行数
@@ -147,7 +146,6 @@
         numberOfLines = _maxNumberOfLines;
 
         // 这里也是为了让文字输入多时, 也能保持好看的UI
-        SLog(@"max lines hit, keep better looking");
         [self performSelector:@selector(scrollTextToBottom) withObject:nil afterDelay:textScrollDelay];
     }
 
@@ -158,27 +156,24 @@
 
     // 变化的行数, 由这个来计算高度的变化值
     int diffLines = (numberOfLines - _currentNumberOfLines);
-    SLog(@"diffLines: %d", diffLines);
     _currentNumberOfLines = numberOfLines;
 
     // 计算应有的高度
     CGRect expectFrame = self.frame;
     CGFloat height = CGRectGetHeight(self.frame);
 
-    SLog(@"old frame: %@", NSStringFromCGRect(expectFrame));
     // 这里只加上lineHeight, 暂时不考虑lineFragmentPadding... TODO LH 可能应该考虑, 这个控件还没那么完善
-    expectFrame.size.height = height + diffLines * self.font.lineHeight;
-    SLog(@"new frame: %@", NSStringFromCGRect(expectFrame));
+    CGFloat heightChange = diffLines * self.font.lineHeight;
+    expectFrame.size.height = height + heightChange;
 
     // 高度变化
     [UIView animateWithDuration:0.25f animations:^{
         self.frame = expectFrame;
 
         if (_heightChangedBlock) {
-            _heightChangedBlock(CGRectGetHeight(expectFrame));
+            _heightChangedBlock(heightChange);
         }
     } completion:^(BOOL completed) {
-        SLog(@"text frame expanded");
         [self performSelector:@selector(scrollTextToBottom) withObject:nil afterDelay:textScrollDelay];
     }];
 }
@@ -191,7 +186,6 @@
 
     // 只有当前在文本末尾输入时, 才自动移动到text的最后部分 - 可以避免用户在中间部分输入时也调整位置
     if (self.selectedRange.location + self.selectedRange.length == self.text.length) {
-        SLog(@"scroll text to bottom and keep them better looking");
         self.contentOffset = CGPointMake(0.0f, self.contentSize.height - self.frame.size.height);
     }
 }

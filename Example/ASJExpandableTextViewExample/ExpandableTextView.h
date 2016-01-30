@@ -1,18 +1,17 @@
 //
 // Created by lihong on 16/1/30.
-// Copyright (c) 2016 Sudeep Jaiswal. All rights reserved.
+// Copyright (c) 2016
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ASJExpandableTextView.h"
 
 /**
  * 高度变化后的回调block
  *
- * @param newHeight 改变后的高度
+ * @param newHeight 改变的相对高度, 即变化了多少
  */
-typedef void (^HeightChangedBlock)(CGFloat newHeight);
+typedef void (^HeightChangedBlock)(CGFloat heightChange);
 
 
 @interface ExpandableTextView : UITextView
