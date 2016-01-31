@@ -1,12 +1,12 @@
 //
-//  ViewController.m
+//  FrameBasedViewController.m
 //  ASJExpandableTextViewExample
 //
 //  Created by sudeep on 08/07/15.
 //  Copyright (c) 2015 Sudeep Jaiswal. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "FrameBasedViewController.h"
 #import "ASJExpandableTextView.h"
 #import "SLogger.h"
 #import "ExpandableTextView.h"
@@ -14,7 +14,7 @@
 #define kDefaultCommentViewHeight (45.0f)
 #define kDefaultTextViewHeight (33.0f)
 
-@interface ViewController ()
+@interface FrameBasedViewController ()
 
 // 评论框View
 @property(nonatomic, strong) UIView *commentView;
@@ -24,7 +24,7 @@
 
 @end
 
-@implementation ViewController
+@implementation FrameBasedViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

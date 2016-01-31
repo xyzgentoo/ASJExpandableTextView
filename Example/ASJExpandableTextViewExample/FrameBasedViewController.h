@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  FrameBasedViewController.h
 //  ASJExpandableTextViewExample
 //
 //  Created by sudeep on 08/07/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface FrameBasedViewController : UIViewController
 
 
 @end
